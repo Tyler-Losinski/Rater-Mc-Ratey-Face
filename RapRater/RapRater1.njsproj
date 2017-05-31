@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2b2f0c9b-9387-4714-82de-b070d26013cf}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>index.android.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -21,6 +21,12 @@
     <Compile Include="index.android.js" />
     <Compile Include="index.ios.js" />
     <Compile Include="main-menu.js" />
+    <Compile Include="quote-cards.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="top-list.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="__tests__\index.android.js" />
     <Compile Include="__tests__\index.ios.js" />
     <Content Include="android\app\build\intermediates\blame\res\debug\multi\values-af.json" />
@@ -1072,6 +1078,7 @@
     <Content Include="RapQuotes.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="img\" />
     <Folder Include="__tests__" />
     <Folder Include="android" />
     <Folder Include="android\app" />

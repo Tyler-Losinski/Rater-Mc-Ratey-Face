@@ -12,10 +12,12 @@ import {
 } from 'react-native';
 
 import {
-    Container, Icon, View, DeckSwiper, Card, CardItem,
-    Thumbnail, Text, Left, Body, Grid
+    Container, Header,
+    Thumbnail, Text, Left, Body, Grid, Tabs, Tab
 } from 'native-base';
 import SideBar from './main-menu';
+import TopList from './top-list';
+import QuoteCards from './quote-cards';
 
 import RapQuotes from './RapQuotes.json'
 
@@ -24,32 +26,15 @@ export default class AwesomeNativeBase extends Component {
     render() {
       return (
         <Container>
-            <View>
-                <DeckSwiper
-                      dataSource={RapQuotes}
-                    renderItem={item =>
-                        <Card style={{ elevation: 3 }}>
-                            <CardItem>
-                                <Left>
-                                    <Body>
-                                        <Text>Rap Quote </Text>
-                                        <Text note>The Best</Text>
-                                    </Body>
-                                </Left>
-                            </CardItem>
-                            <CardItem >
-                                  <Body >
-                                      <Text>{'"'+item.quote + '"'}</Text>
-                                  </Body>
-                            </CardItem>
-                            <CardItem>
-                                  <Icon name='home' android="md-done-all" style={{ color: '#ED4A6A' }} />
-                                <Text>{item.quotee}</Text>
-                            </CardItem>
-                        </Card>
-                    }
-                />
-            </View>
+              <Header hasTabs />
+              <Tabs locked={true}>
+                  <Tab heading="Rating">
+                      <QuoteCards />
+                  </Tab>
+                  <Tab heading="Top List">
+                      <TopList />
+                  </Tab>
+              </Tabs>
         </Container>  
       );
   }
