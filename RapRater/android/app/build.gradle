@@ -126,6 +126,7 @@ android {
 }
 
 dependencies {
+    compile project(':SocketIo')
     compile project(':react-native-mail')
     compile project(':react-native-fs')
     compile project(':react-native-vector-icons')

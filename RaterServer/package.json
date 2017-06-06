@@ -1,0 +1,20 @@
+{
+  "name": "dotsc-node",
+  "version": "1.0.0",
+  "description": "A server application that can read in data from other applications and process data server side with MSSql backend.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ruben",
+  "license": "ISC",
+  "dependencies": {
+    "cloudant": "^1.8.0",
+    "colors": "^1.1.2",
+    "express": "^4.15.3",
+    "mssql": "^3.3.0",
+    "socket.io": "^1.7.4",
+    "string-format": "^0.5.0",
+    "winston": "^2.3.1"
+  }
+}
