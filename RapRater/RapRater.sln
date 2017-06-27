@@ -7,6 +7,8 @@ Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "RaterUI", "RaterUI.njsproj"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "RaterServer", "..\RaterServer\RaterServer.njsproj", "{1AE612AD-0384-4439-871E-EEEA98EF9D34}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "QuotesDB", "..\QuotesDB\QuotesDB.sqlproj", "{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{1AE612AD-0384-4439-871E-EEEA98EF9D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AE612AD-0384-4439-871E-EEEA98EF9D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AE612AD-0384-4439-871E-EEEA98EF9D34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD0DCD0-4904-45CF-814E-AF2CEC0DE041}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
