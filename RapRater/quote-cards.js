@@ -18,60 +18,97 @@ import {
 import SideBar from './main-menu';
 import TopList from './top-list';
 
-import RapQuotes from './RapQuotes.json'
+import io from 'socket.io-client/dist/socket.io';
+
+
 
 export default class QuoteCards extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            RapQuotes: [{
+                Quote: '',
+                Quotee:''
+            }]
+        };
+        this.socket = io('http://134.129.126.29:3001',  { transports: ['websocket'] });
+
+        this.socket.emit("get_quotes");
+
+        this.swipeRight = this.swipeRight.bind(this);
+        this.swipeLeft = this.swipeLeft.bind(this);
+
     }
 
+    swipeRight(e) {
+        this.socket.emit('upvote', e.ID)
+    }
+
+    swipeLeft(e) {
+        this.socket.emit('downvote', e.ID)
+    }
+
+    componentDidMount() {
+        this.socket.on('card_quotes', (data) => {
+            this.setState({
+                RapQuotes: data
+            })
+        })
+    }
 
     render() {
+
         return (
-            <Container>
+            <Container >
                 <View>
-                    <DeckSwiper
-                        dataSource={RapQuotes}
-                        renderItem={item =>
-                            <Card style={{ elevation: 3 }}>
-                                <CardItem>
-                                    <Left>
-                                        <Body>
-                                            <Text>Rap Quote </Text>
-                                            <Text note>The Best</Text>
+                    {this.state.RapQuotes[0].Quote != '' && 
+                        <DeckSwiper
+                        onSwipeRight={this.swipeRight}
+                        onSwipeLeft={this.swipeLeft}
+                            dataSource={this.state.RapQuotes}
+                            renderItem={item =>
+                                <Card style={{ elevation: 3 }}>
+                                    <CardItem>
+                                        <Left>
+                                            <Body>
+                                                <Text>Rap Quote </Text>
+                                                <Text note>The Best</Text>
+                                            </Body>
+                                        </Left>
+                                    </CardItem>
+                                    <CardItem >
+                                        <Body >
+                                            <Text>{'"' + item.Quote + '"'}</Text>
                                         </Body>
-                                    </Left>
-                                </CardItem>
-                                <CardItem >
-                                    <Body >
-                                        <Text>{'"' + item.quote + '"'}</Text>
-                                    </Body>
-                                </CardItem>
-                                <CardItem>
-                                    <Icon name="ios-american-football" />
-                                    <Text>{item.quotee}</Text>
-                                </CardItem>
-                                <CardItem>
-                                    <Left>
-                                        <Image style={{ width: 50, height: 50 }}
-                                            source={require('./img/red_x.png')}
-                                        />
-                                    </Left>
-                                    <Right>
-                                        <Image style={{ width: 50, height: 50 }}
-                                            source={require('./img/green_thumb.png')}
-                                        />
-                                    </Right>
-                                </CardItem>
-                            </Card>
-                        }
-                    />
-                </View>
-            </Container>
+                                    </CardItem>
+                                    <CardItem>
+                                    <Icon name="md-quote" />
+                                        <Text>{item.Quotee}</Text>
+                                    </CardItem>
+                                    <CardItem>
+                                        <Left>
+                                            <Image style={{ width: 50, height: 50 }}
+                                                source={require('./img/red_x.png')}
+                                            />
+                                        </Left>
+                                        <Right>
+                                            <Image style={{ width: 50, height: 50 }}
+                                                source={require('./img/green_thumb.png')}
+                                            />
+                                        </Right>
+                                    </CardItem>
+                                </Card>
+                            }
+                        />
+                    }
+            </View>
+            </Container >
         );
     }
+
 }
+
+
 
 const styles = StyleSheet.create({
     container: {

@@ -30,24 +30,57 @@ function voting(sqc, netEvent) {
     let socket = netEvent.socket;
     let io = netEvent.io;
 
-    socket.on('log_in', (data) => {
-        let query = `SELECT * FROM County
-            WHERE [EmailAddress] = @email
-			AND [Password] = @pass;`;
+    socket.on('test', (data) => {
+        logger.info(data);
+    })
 
-        sqc.SqlSelectParamCall(query,
-            [
-                sqc.paramize('email', data.user, sql.NVarChar(sql.MAX)),
-                sqc.paramize('pass', data.pass, sql.NVarChar(sql.MAX)),
-               
-            ],
+    socket.on('upvote', (data) => {
+        let query = `UPDATE RapQuotes SET Votes = Votes + 1 WHERE ID = @QuoteID`;
+
+        // route event stores a list of lines, everythin else stores lat+lng
+        let params = [
+            sqc.paramize('QuoteID', data, sql.Int),
+        ];
+
+        sqc.SqlExecuteStatementCallback(query, params, null,
+            (recordSet) => {
+                logger.log(recordSet);
+            });
+    })
+
+    socket.on('downvote', (data) => {
+        let query = `UPDATE RapQuotes SET Votes = Votes - 1 WHERE ID = @QuoteID`;
+
+        // route event stores a list of lines, everythin else stores lat+lng
+        let params = [
+            sqc.paramize('QuoteID', data, sql.Int),
+        ];
+
+        sqc.SqlExecuteStatementCallback(query, params, null,
+            (recordSet) => {
+                logger.log(recordSet);
+            });
+    })
+
+    socket.on('get_quotes_list', () => {
+        let query = `SELECT * FROM RapQuotes
+            ORDER BY Votes DESC;`;
+
+        sqc.SqlSelectParamCall(query, [],
             (data) => {
-                if (typeof data[0] == 'undefined') {
-                    socket.emit('login', {sucess: false});
-            }
-                else
-                    socket.emit('login', { sucess: true, agencyId: data[0].ID, agencyName: data[0].Name, permission: data[0].Permission });
+                socket.emit('list_quotes', data)
+            });
 
+    })
+
+    socket.on('get_quotes', () => {
+
+        let query = `SELECT * FROM RapQuotes
+            ORDER BY NEWID();`;
+
+        sqc.SqlSelectParamCall(query,[],
+            (data) => {
+                socket.emit('card_quotes', data)
         });
     });
 }

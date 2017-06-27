@@ -12,29 +12,53 @@ import {
 } from 'react-native';
 
 import {
-    Container, Icon, ListItem, List,
+    Container, Icon, ListItem, List, Right,
     Thumbnail, Text, Left, Body, Grid, Content
 } from 'native-base';
 import SideBar from './main-menu';
 
 import RapQuotes from './RapQuotes.json'
+import io from 'socket.io-client/dist/socket.io';
+
 
 export default class TopLists extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            RapQuotes: [{
+                Quote: '',
+                Quotee: ''
+            }]
+        };
+        this.socket = io('http://134.129.126.29:3001', { transports: ['websocket'] });
+        this.socket.emit('get_quotes_list');
+    }
+
+    componentDidMount() {
+        this.socket.on('list_quotes', (data) => {
+            this.setState({
+                RapQuotes: data
+            })
+        })
+    }
 
     render() {
         return (
             <Container>
                 <Content>
-                    <List dataArray={RapQuotes}
-                        renderRow={(item) =>
-                            <ListItem>
+                    {this.state.RapQuotes[0].Quote != '' &&
+                        <List dataArray={this.state.RapQuotes}
+                            renderRow={(item) =>
+                                <ListItem>
                                 <Body>
-                                    <Text>{item.quote}</Text>
-                                    <Text note>{item.quotee}</Text>
-                                </Body>
-                            </ListItem>
-                        }>
-                    </List>
+                                    <Left><Text>{'"' + item.Quote + '"'}</Text></Left>
+                                    <Text note>{item.Quotee} <Icon name="ios-thumbs-up" />{item.Votes}</Text>
+                                    </Body>
+                                </ListItem>
+                            }>
+                        </List>
+                    }
                 </Content>
             </Container>
         );

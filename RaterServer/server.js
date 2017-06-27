@@ -24,11 +24,11 @@ sqlConn.SqlTestConnection();
 
 logger.level = 'error';
 
-sqlConn.SqlSelectParamCall(`
-        SELECT TOP 10 ID, Quote, Quotee
-        FROM RapQuotes;
-    `, [], (data) => {
-        logger.info(data);
-    });
+//sqlConn.SqlSelectParamCall(`
+//        SELECT TOP 10 ID, Quote, Quotee
+//        FROM RapQuotes;
+//    `, [], (data) => {
+//        logger.info(data);
+//    });
 
 

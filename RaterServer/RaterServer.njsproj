@@ -30,6 +30,7 @@
   <ItemGroup>
     <Compile Include="logger.js" />
     <Compile Include="server.js" />
+    <Compile Include="socket-module.js" />
     <Compile Include="SqlServer\sqlserver.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />

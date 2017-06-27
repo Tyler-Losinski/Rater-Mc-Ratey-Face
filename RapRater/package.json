@@ -14,12 +14,10 @@
     "react-native-easy-grid": "^0.1.8",
     "react-native-fs": "^2.3.2",
     "react-native-icons": "^0.7.1",
-    "react-native-mail": "^3.0.1",
-    "react-native-maps": "^0.14.0",
     "react-native-router-flux": "^3.39.1",
     "react-native-socketio": "^0.3.0",
-    "react-native-sqlite-storage": "^3.3.1",
-    "react-native-vector-icons": "^4.1.1"
+    "react-native-vector-icons": "^4.1.1",
+    "socket.io-client": "^2.0.3"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

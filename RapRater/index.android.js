@@ -23,6 +23,15 @@ import RapQuotes from './RapQuotes.json'
 
 export default class AwesomeNativeBase extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            active: 'stuff'
+        };
+
+    }
+
     render() {
       return (
         <Container>
