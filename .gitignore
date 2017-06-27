@@ -16,3 +16,7 @@ RaterServer/node_modules/accepts/
 RaterServer/node_modules/
 
 RaterServer/Logs/
+
+RapRater/android/gradle\.properties
+
+RaterServer/SqlServer/serverConfig\.json
