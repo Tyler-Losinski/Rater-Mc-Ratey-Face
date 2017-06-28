@@ -1077,6 +1077,9 @@
     <Content Include="android\build\intermediates\dex-cache\cache.xml" />
     <Content Include="ios\AwesomeNativeBase\Images.xcassets\AppIcon.appiconset\Contents.json" />
     <Content Include="RapQuotes.json" />
+    <Content Include="server-config.json">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />

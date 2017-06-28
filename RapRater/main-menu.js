@@ -5,7 +5,8 @@ import {
     Navigator, TouchableHighlight, ToastAndroid, Text
 } from 'react-native';
 
-import {Fab, Container, Header, Title, Content, Footer,
+import {
+    Fab, Container, Header, Title, Content, Footer, List, ListItem,
     FooterTab, Button, Left, Right, Body, ActionSheet, Icon, Toast
 } from 'native-base';
 
@@ -53,25 +54,19 @@ export default class MainMenu extends Component {
     body() {
         return (
             <Container>
-                <Col style={{ paddingTop: 60 }}>
-
-                    <Button style={{ margin: 10 }} block iconLeft onPress={() => { Actions.siteEditorCounties({ data: this.state.active }) }} warning>
-                        <Icon name='ios-flag' />
-                        <Text> Site Editor </Text>
-                    </Button>
-
-                    <Button style={{ margin: 10 }} block iconLeft info onPress={Actions.siteSelector}> 
-                        <Icon name='ios-clipboard' />
-                        <Text> Counter </Text>
-                    </Button>
-
-                    <Button style={{ margin: 10 }} block iconLeft onPress={Actions.sendMenu} success>
-                        <Icon name='mail' />
-                        <Text> Send Data </Text>
-                    </Button>
-
-                </Col>
-
+                <Content style={{ backgroundColor: '#C0C0C0' }}>
+                    <List>
+                        <ListItem>
+                            <Text>Simon Mignolet</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Nathaniel Clyne</Text>
+                        </ListItem>
+                        <ListItem>
+                            <Text>Dejan Lovren</Text>
+                        </ListItem>
+                    </List>
+                </Content>
             </Container>);
     }
 

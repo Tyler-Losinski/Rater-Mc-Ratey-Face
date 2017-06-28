@@ -12,14 +12,13 @@ import {
 } from 'react-native';
 
 import {
-    Container, Header,
+    Container, Header, Drawer, Button, Icon,
     Thumbnail, Text, Left, Body, Grid, Tabs, Tab
 } from 'native-base';
-import SideBar from './main-menu';
+
 import TopList from './top-list';
 import QuoteCards from './quote-cards';
-
-import RapQuotes from './RapQuotes.json'
+import SideBar from './main-menu.js'
 
 export default class AwesomeNativeBase extends Component {
 
@@ -32,19 +31,56 @@ export default class AwesomeNativeBase extends Component {
 
     }
 
+    static propTypes = {
+        drawerState: React.PropTypes.string,
+        popRoute: React.PropTypes.func,
+        closeDrawer: React.PropTypes.func,
+        navigation: React.PropTypes.shape({
+            key: React.PropTypes.string,
+            routes: React.PropTypes.array,
+        }),
+    }
+
+    openDrawer() {
+        this._drawer._root.open();
+    }
+
+    closeDrawer() {
+        if (this.props.drawerState === 'opened') {
+            this.props.closeDrawer();
+        }
+    }
+
     render() {
-      return (
-        <Container>
-              <Header hasTabs />
-              <Tabs locked={true}>
-                  <Tab heading="Rating">
-                      <QuoteCards />
-                  </Tab>
-                  <Tab heading="Top List">
-                      <TopList />
-                  </Tab>
-              </Tabs>
-        </Container>  
+        return (
+            <Drawer
+                ref={(ref) => { this._drawer = ref; }}
+                content={<SideBar navigator={this._navigator} />}
+                side="left"
+                panOpenMask={.10}
+            >
+
+                <Container>
+                    
+                    <Header hasTabs  >
+                        <Left>
+                            <Button transparent onPress={() => { this.openDrawer() }}>
+                        <Icon name='ios-menu' />
+                    </Button>
+                        </Left>
+                    </Header>
+                    <Tabs locked={true}>
+                        <Tab heading="Rating">
+                            <QuoteCards />
+                        </Tab>
+                        <Tab heading="Top List">
+                            <TopList />
+                        </Tab>
+                    </Tabs>
+                    
+                </Container>
+            </Drawer>
+           
       );
   }
 }

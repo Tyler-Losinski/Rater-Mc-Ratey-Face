@@ -13,12 +13,12 @@ import {
 
 import {
     Container, Icon, ListItem, List, Right,
-    Thumbnail, Text, Left, Body, Grid, Content
+    Thumbnail, Text, Left, Body, Grid, Content, Spinner
 } from 'native-base';
 import SideBar from './main-menu';
 
-import RapQuotes from './RapQuotes.json'
 import io from 'socket.io-client/dist/socket.io';
+import config from './server-config.json';
 
 
 export default class TopLists extends Component {
@@ -31,7 +31,7 @@ export default class TopLists extends Component {
                 Quotee: ''
             }]
         };
-        this.socket = io('http://134.129.126.29:3001', { transports: ['websocket'] });
+        this.socket = io('http://still-tundra-25462.herokuapp.com', { transports: ['websocket'] });
         this.socket.emit('get_quotes_list');
     }
 
@@ -47,6 +47,9 @@ export default class TopLists extends Component {
         return (
             <Container>
                 <Content>
+                    {this.state.RapQuotes[0].Quote == '' &&
+                        <Spinner color='blue' />
+                    }
                     {this.state.RapQuotes[0].Quote != '' &&
                         <List dataArray={this.state.RapQuotes}
                             renderRow={(item) =>
