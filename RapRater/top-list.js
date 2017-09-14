@@ -1,10 +1,4 @@
-﻿/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import {
     AppRegistry,
     StyleSheet,
@@ -12,13 +6,14 @@ import {
 } from 'react-native';
 
 import {
-    Container, Icon, ListItem, List, Right,
+    Container, Icon, ListItem, List, Right, RefreshControl,
     Thumbnail, Text, Left, Body, Grid, Content, Spinner
 } from 'native-base';
 import SideBar from './main-menu';
 
 import io from 'socket.io-client/dist/socket.io';
 import config from './server-config.json';
+import PTRView from 'react-native-pull-to-refresh';
 
 
 export default class TopLists extends Component {
@@ -29,7 +24,8 @@ export default class TopLists extends Component {
             RapQuotes: [{
                 Quote: '',
                 Quotee: ''
-            }]
+            }],
+            isRefreshing: false
         };
         this.socket = io('http://still-tundra-25462.herokuapp.com', { transports: ['websocket'] });
         this.socket.emit('get_quotes_list');
@@ -43,6 +39,12 @@ export default class TopLists extends Component {
         })
     }
 
+    refreshList(e) {
+        this.setState({
+            isRefreshing: true
+        })
+    }
+
     render() {
         return (
             <Container>
@@ -51,7 +53,13 @@ export default class TopLists extends Component {
                         <Spinner color='blue' />
                     }
                     {this.state.RapQuotes[0].Quote != '' &&
-                        <List dataArray={this.state.RapQuotes}
+                        <List
+                        refreshControl={
+                            <RefreshControl refreshing={this.state.isRefreshing}
+                                onRefresh={this.refreshList.bind(this)}
+                            />
+                        }
+                        dataArray={this.state.RapQuotes}
                             renderRow={(item) =>
                                 <ListItem>
                                 <Body>

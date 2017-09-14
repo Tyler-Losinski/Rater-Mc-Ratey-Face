@@ -13,8 +13,6 @@ import {
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
 
-var countyData = [];
-
 /**
  * 
  */
@@ -26,26 +24,9 @@ export default class MainMenu extends Component {
         this.state = {
             active: 'stuff'
         };
-
-        //Setup storage for first use
-        AsyncStorage.getAllKeys((err, keys) => {
-            console.log(keys);
-            var exists = false;
-            for (var i = 0; i < keys.length; i++) {
-                if (keys[i] == 'Counties')
-                    exists = true;
-            }
-            if (!exists)
-            {
-                AsyncStorage.setItem('Counties', JSON.stringify(countyData), () => { });
-            }
-        });
     }
 
     componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', () => {
-                Actions.pop();
-        });
     }
 
     /**
@@ -54,16 +35,10 @@ export default class MainMenu extends Component {
     body() {
         return (
             <Container>
-                <Content style={{ backgroundColor: '#C0C0C0' }}>
+                <Content style={{ backgroundColor: '#fafafa' }}>
                     <List>
                         <ListItem>
-                            <Text>Simon Mignolet</Text>
-                        </ListItem>
-                        <ListItem>
-                            <Text>Nathaniel Clyne</Text>
-                        </ListItem>
-                        <ListItem>
-                            <Text>Dejan Lovren</Text>
+                            <Text>More quotes coming soon!</Text>
                         </ListItem>
                     </List>
                 </Content>

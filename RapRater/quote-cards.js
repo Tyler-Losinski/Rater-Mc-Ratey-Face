@@ -1,10 +1,4 @@
-﻿/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import {
     AppRegistry,
     StyleSheet, 
@@ -20,7 +14,7 @@ import TopList from './top-list';
 
 import io from 'socket.io-client/dist/socket.io';
 import config from './server-config.json';
-
+import PTRView from 'react-native-pull-to-refresh';
 
 
 export default class QuoteCards extends Component {
@@ -38,7 +32,14 @@ export default class QuoteCards extends Component {
 
         this.swipeRight = this.swipeRight.bind(this);
         this.swipeLeft = this.swipeLeft.bind(this);
+        this.refresh = this.refresh.bind(this);
 
+    }
+
+    refresh(e) {
+        return new Promise((resolve) => {
+            setTimeout(() => { resolve() }, 2000)
+        });
     }
 
     swipeRight(e) {
@@ -60,7 +61,7 @@ export default class QuoteCards extends Component {
     render() {
 
         return (
-            <Container >
+            <PTRView onRefresh={this.refresh} >
                 <View>
                     {this.state.RapQuotes[0].Quote == '' &&
                         <Spinner color='blue' />
@@ -106,7 +107,7 @@ export default class QuoteCards extends Component {
                         />
                     }
             </View>
-            </Container >
+            </PTRView>
         );
     }
 
