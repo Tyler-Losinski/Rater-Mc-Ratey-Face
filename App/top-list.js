@@ -25,16 +25,16 @@ export default class TopLists extends Component {
             }],
             isRefreshing: false
         };
-        this.socket = io('http://still-tundra-25462.herokuapp.com', { transports: ['websocket'] });
-        this.socket.emit('get_quotes_list');
+        // this.socket = io('http://still-tundra-25462.herokuapp.com', { transports: ['websocket'] });
+        // this.socket.emit('get_quotes_list');
     }
 
     componentDidMount() {
-        this.socket.on('list_quotes', (data) => {
-            this.setState({
-                RapQuotes: data
-            })
-        })
+        // this.socket.on('list_quotes', (data) => {
+        //     this.setState({
+        //         RapQuotes: data
+        //     })
+        // })
     }
 
     refreshList(e) {
@@ -52,11 +52,6 @@ export default class TopLists extends Component {
                     }
                     {this.state.RapQuotes[0].Quote != '' &&
                         <List
-                        refreshControl={
-                            <RefreshControl refreshing={this.state.isRefreshing}
-                                onRefresh={this.refreshList.bind(this)}
-                            />
-                        }
                         dataArray={this.state.RapQuotes}
                             renderRow={(item) =>
                                 <ListItem>

@@ -1,17 +1,13 @@
 ﻿import React, { Component } from 'react';
 
 import {
-    AppRegistry, StyleSheet, View, AsyncStorage, BackHandler,
-    Navigator, TouchableHighlight, ToastAndroid, Text
+   Text
 } from 'react-native';
 
 import {
-    Fab, Container, Header, Title, Content, Footer, List, ListItem,
-    FooterTab, Button, Left, Right, Body, ActionSheet, Icon, Toast
+     Container,   Content,  List, ListItem,
 } from 'native-base';
 
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import { Actions } from 'react-native-router-flux';
 
 /**
  * 
@@ -33,6 +29,12 @@ export default class SideBar extends Component {
      * Note: icons are from the ion set.
      */
     body() {
+    }
+
+    /**
+     * 
+     */
+    render() {
         return (
             <Container>
                 <Content style={{ backgroundColor: '#fafafa' }}>
@@ -43,13 +45,7 @@ export default class SideBar extends Component {
                     </List>
                 </Content>
             </Container>);
-    }
 
-    /**
-     * 
-     */
-    render() {
-        return this.body();
     }
 }
 

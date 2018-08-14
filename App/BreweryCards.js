@@ -1,18 +1,14 @@
 ﻿import React, { Component } from 'react';
 import {
-    AppRegistry,
     StyleSheet, 
     Image
 } from 'react-native';
 
 import {
-    Container, Icon, View, DeckSwiper, Card, CardItem,
-    Thumbnail, Text, Left, Body, Grid, Right, Spinner
+    Card, CardItem, Thumbnail, Text, Button, Left, Body, Right,
+    Icon, View
 } from 'native-base';
-import SideBar from './SideBar';
-import TopList from './top-list';
 
-import io from 'socket.io-client/dist/socket.io';
 import config from './server-config.json';
 
 
@@ -42,26 +38,57 @@ export default class BreweryCards extends Component {
     }
 
     swipeRight(e) {
-        this.socket.emit('upvote', e.ID)
+      //  this.socket.emit('upvote', e.ID)
     }
 
     swipeLeft(e) {
-        this.socket.emit('downvote', e.ID)
+    //    this.socket.emit('downvote', e.ID)
     }
 
     componentDidMount() {
-        this.socket.on('card_quotes', (data) => {
-            this.setState({
-                RapQuotes: data
-            })
-        })
+        // this.socket.on('card_quotes', (data) => {
+        //     this.setState({
+        //         RapQuotes: data
+        //     })
+        // })
     }
 
     render() {
 
         return (
-                <View>
-                </View>
+            <View>
+                <Card>
+                    <CardItem>
+                    <Left>
+                        <Thumbnail source={{uri: 'https://hypixel.net/attachments/dd8dba62-ebd4-4fcc-9308-ccf064224ee0-png.858244/'}} />
+                        <Body>
+                        <Text>Cookie Monster</Text>
+                        <Text note>Cookies Inc.</Text>
+                        </Body>
+                    </Left>
+                    </CardItem>
+                    <CardItem cardBody>
+                    <Image source={{uri: 'https://wallpaper-house.com/data/out/7/wallpaper2you_167182.jpg'}} style={{height: 200, width: null, flex: 1}}/>
+                    </CardItem>
+                    <CardItem>
+                    <Left>
+                        <Button transparent>
+                        <Icon active name="thumbs-up" />
+                        <Text>12 Likes</Text>
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Button transparent>
+                        <Icon active name="chatbubbles" />
+                        <Text>4 Comments</Text>
+                        </Button>
+                    </Body>
+                    <Right>
+                        <Text>11h ago</Text>
+                    </Right>
+                    </CardItem>
+                </Card>
+            </View>
         );
     }
 

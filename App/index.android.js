@@ -18,7 +18,7 @@ import {
 
 import TopList from './top-list.js';
 import QuoteCards from './BreweryCards.js';
-import SideBar from './SideBar.js'
+import SideBar from './SideBar'
 
 export default class AwesomeNativeBase extends Component {
 
@@ -42,7 +42,7 @@ export default class AwesomeNativeBase extends Component {
     }
 
     openDrawer() {
-        this._drawer._root.open();
+        //this._drawer._root.open();
     }
 
     closeDrawer() {
@@ -53,16 +53,16 @@ export default class AwesomeNativeBase extends Component {
 
     render() {
         return (
-            <Drawer
-                ref={(ref) => { this._drawer = ref; }}
-                content={<SideBar navigator={this._navigator} />}
-                side="left"
-                panOpenMask={.10}
-            >
+            // <Drawer
+            //     ref={(ref) => { this._drawer = ref; }}
+            //     content={<SideBar navigator={this._navigator} />}
+            //     side="left"
+            //     panOpenMask={.10}
+            // >
 
                 <Container>
                     
-                    <Header hasTabs  >
+                    <Header hasTabs>
                         <Left>
                             <Button transparent onPress={() => { this.openDrawer() }}>
                         <Icon name='ios-menu' />
@@ -79,7 +79,7 @@ export default class AwesomeNativeBase extends Component {
                     </Tabs>
                     
                 </Container>
-            </Drawer>
+           // </Drawer>
            
       );
   }
