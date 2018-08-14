@@ -1,2 +1,0 @@
-C:\Users\dotsc_67\Desktop\Repositories\Git\Rap Rater\RapRater\obj\Debug\RapRater1.njsprojResolveAssemblyReference.cache
-C:\Users\dotsc_67\Desktop\Repositories\Git\Rap Rater\RapRater\bin\Microsoft.NodejsTools.WebRole.dll

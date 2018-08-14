@@ -20,3 +20,5 @@ RaterServer/Logs/
 RapRater/android/gradle\.properties
 
 RaterServer/SqlServer/serverConfig\.json
+
+/App/android/app/build

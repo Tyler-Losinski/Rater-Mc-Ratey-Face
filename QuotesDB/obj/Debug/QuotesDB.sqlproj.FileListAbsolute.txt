@@ -1,5 +1,0 @@
-C:\Users\dotsc_67\Desktop\Repositories\Git\RapRater\QuotesDB\bin\Debug\QuotesDB.dacpac
-C:\Users\dotsc_67\Desktop\Repositories\Git\RapRater\QuotesDB\bin\Debug\QuotesDB.dll
-C:\Users\dotsc_67\Desktop\Repositories\Git\RapRater\QuotesDB\bin\Debug\QuotesDB.pdb
-C:\Users\dotsc_67\Desktop\Repositories\Git\RapRater\QuotesDB\obj\Debug\QuotesDB.dll
-C:\Users\dotsc_67\Desktop\Repositories\Git\RapRater\QuotesDB\obj\Debug\QuotesDB.pdb
