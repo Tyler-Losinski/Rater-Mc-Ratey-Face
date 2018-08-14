@@ -85,7 +85,7 @@ export default class TopLists extends Component {
                                         <Body>
                                             <Card>
                                                 <CardItem>
-                                                    <Left>
+                                                    <Left>sf
                                                         <Icon active name="beer" />
                                                         <Body>
                                                             <Text>{item.name}</Text>
@@ -95,7 +95,7 @@ export default class TopLists extends Component {
                                                     </Left>
                                                 </CardItem>
                                                 <CardItem cardBody>
-                                                    <Image source={{ uri: item.labels ? item.labels.medium : '' }} style={{ height: 200, width: null, flex: 1 }} />
+                                                    <Image source={{ uri: item.labels ? item.labels.medium : require('./img/beer-tile.png') }} style={{ height: 200, width: null, flex: 1 }} />
                                                 </CardItem>
                                                 <CardItem>
                                                     <Body>
