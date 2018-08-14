@@ -1,87 +1,129 @@
 ﻿import React, { Component } from 'react';
 import {
-    StyleSheet, 
+    StyleSheet,
     Image
 } from 'react-native';
 
 import {
     Card, CardItem, Thumbnail, Text, Button, Left, Body, Right,
-    Icon, View, Spinner
+    Icon, View, Spinner, Container, Content, List, ListItem, Header, Title
 } from 'native-base';
+
+import { Actions } from 'react-native-router-flux';
 
 export default class BreweryCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            brand:'',
-            image: '',
-            icon: ''
+            data: []
         };
 
     }
 
 
     componentDidMount() {
-        fetch('https://api.brewerydb.com/v2/brewery/random?key=ef09f9959191ba23af7d87deb78f443e&format=json')
-        .then((response) => response.json())
-        .then((responseJson) => {
-            console.log(responseJson);
-            if(responseJson.message == "Request Successful"){
+        fetch('https://api.brewerydb.com/v2/locations?locality=fargo&key=ef09f9959191ba23af7d87deb78f443e&format=json')
+            .then((response) => response.json())
+            .then((responseJson) => {
                 this.setState({
-                    image: responseJson.data.images ? responseJson.data.images.large : '',
-                    icon: responseJson.data.images ? responseJson.data.images.icon : '',
-                    name: responseJson.data.name,
-                    brand: responseJson.data.brandClassification ? responseJson.data.brandClassification: ''
-                });    
-            }
-             
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+                    data: responseJson.data ? responseJson.data : []
+                }, () => { this.getMoorhead() });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    }
+
+    getMoorhead() {
+        fetch('https://api.brewerydb.com/v2/locations?locality=moorhead&key=ef09f9959191ba23af7d87deb78f443e&format=json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.data) {
+                    for (var i = 0; i < responseJson.data.length; i++) {
+                        this.setState({
+                            data: this.state.data.concat(responseJson.data[i])
+                        });
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    }
+
+    cardPress = (breweryId) =>
+    {
+        Actions.topList({breweryId: breweryId});
     }
 
     render() {
 
         return (
-            <View>
-                {this.state.name == '' &&
-                    <Spinner color='blue' />
-                }
-                {this.state.name != '' &&
-                <Card>
-                    <CardItem>
+            <Container>
+                <Header>
                     <Left>
-                        <Thumbnail source={{uri: this.state.icon}} />
-                        <Body>
-                        <Text>{this.state.name}</Text>
-                        <Text note>Brand: {this.state.brand}</Text>
-                        </Body>
-                    </Left>
-                    </CardItem>
-                    <CardItem cardBody>
-                    <Image source={{uri: this.state.image}} style={{height: 200, width: null, flex: 1}}/>
-                    </CardItem>
-                    <CardItem>
-                    <Left>
-                        <Button transparent>
-                        <Icon active name="thumbs-up" />
-                        <Text>12 Likes</Text>
+                        <Button transparent onPress={() => { this.openDrawer() }}>
+                            <Icon name='ios-menu' />
                         </Button>
                     </Left>
-                    <Body>
-                        <Button transparent>
-                        <Icon active name="chatbubbles" />
-                        <Text>4 Comments</Text>
-                        </Button>
-                    </Body>
-                    <Right>
-                        <Text>11h ago</Text>
-                    </Right>
-                    </CardItem>
-                </Card>}
-            </View>
+                    <Body style={{paddingLeft: 40}}>
+                        <Title>Breweries</Title> 
+                    </Body> 
+                </Header>
+
+                <Content>
+
+                    <View>
+                        {this.state.data.length == 0 &&
+                            <Spinner color='blue' />
+                        }
+                        {this.state.data.length != 0 &&
+                            <List
+                                dataArray={this.state.data}
+                                renderRow={(item) => 
+                                    <ListItem name={item.id} button onPress={() => {this.cardPress(item.breweryId);}}> 
+                                        <Body>
+                                            <Card>
+                                                <CardItem>
+                                                    <Left>
+                                                        <Thumbnail source={{ uri: item.brewery.images ? item.brewery.images.icon : '' }} />
+                                                        <Body>
+                                                            <Text>{item.brewery.name}</Text>
+                                                            <Text note>{item.streetAddress} , {item.locality}</Text>
+                                                        </Body>
+                                                    </Left>
+                                                </CardItem>
+                                                <CardItem cardBody>
+                                                    <Image source={{ uri: item.brewery.images ? item.brewery.images.large : '' }} style={{ height: 200, width: null, flex: 1 }} />
+                                                </CardItem>
+                                                <CardItem>
+                                                    <Left>
+                                                        <Button transparent>
+                                                            <Icon active name="thumbs-up" />
+                                                            <Text>12 Likes</Text>
+                                                        </Button>
+                                                    </Left>
+                                                    <Body>
+                                                        <Button transparent>
+                                                            <Icon active name="chatbubbles" />
+                                                            <Text>4 Comments</Text>
+                                                        </Button>
+                                                    </Body>
+                                                    <Right>
+                                                        <Text>11h ago</Text>
+                                                    </Right>
+                                                </CardItem>
+                                            </Card>
+                                        </Body>
+                                    </ListItem>
+                                }>
+                            </List>
+                        }
+                    </View>
+                </Content>
+            </Container>
         );
     }
 

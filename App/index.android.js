@@ -8,16 +8,17 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Image
 } from 'react-native';
 
 import {
     Container, Header, Drawer, Button, Icon,
-    Thumbnail, Text, Left, Body, Grid, Tabs, Tab
+    Thumbnail, Text, Left, Body, Title, Tabs, Tab
 } from 'native-base';
 
+import { Router, Scene } from 'react-native-router-flux';
+
 import TopList from './top-list.js';
-import QuoteCards from './BreweryCards.js';
+import BreweryCards from './BreweryCards.js';
 import SideBar from './SideBar'
 
 export default class AwesomeNativeBase extends Component {
@@ -60,25 +61,18 @@ export default class AwesomeNativeBase extends Component {
             //     panOpenMask={.10}
             // >
 
-                <Container>
-                    
-                    <Header hasTabs>
-                        <Left>
-                            <Button transparent onPress={() => { this.openDrawer() }}>
-                        <Icon name='ios-menu' />
-                    </Button>
-                        </Left>
-                    </Header>
-                    <Tabs locked={true}>
-                        <Tab heading="Rating">
-                            <QuoteCards />
-                        </Tab>
-                        <Tab heading="Top List">
-                            <TopList />
-                        </Tab>
-                    </Tabs>
-                    
-                </Container>
+                    <Router hideNavBar= "true">
+                        <Scene key="root">
+                            <Scene key="breweryCards"
+                            component={BreweryCards}
+                            initial
+                            />
+                            <Scene
+                            key="topList"
+                            component={TopList}
+                            />
+                        </Scene>
+                    </Router>
            // </Drawer>
            
       );
