@@ -1,4 +1,4 @@
-package com.awesomenativebase;
+package com.fargobrews;
 
 import com.facebook.react.ReactActivity;
 

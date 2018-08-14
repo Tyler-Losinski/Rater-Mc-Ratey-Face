@@ -16,7 +16,7 @@ import { Actions } from 'react-native-router-flux';
 /**
  * 
  */
-export default class MainMenu extends Component {
+export default class SideBar extends Component {
 
     constructor(props) {
         super(props);
@@ -38,7 +38,7 @@ export default class MainMenu extends Component {
                 <Content style={{ backgroundColor: '#fafafa' }}>
                     <List>
                         <ListItem>
-                            <Text>More quotes coming soon!</Text>
+                            <Text>Coming soon!</Text>
                         </ListItem>
                     </List>
                 </Content>

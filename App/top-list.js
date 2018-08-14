@@ -9,12 +9,10 @@ import {
     Container, Icon, ListItem, List, Right, RefreshControl,
     Thumbnail, Text, Left, Body, Grid, Content, Spinner
 } from 'native-base';
-import SideBar from './main-menu';
+import SideBar from './SideBar';
 
 import io from 'socket.io-client/dist/socket.io';
 import config from './server-config.json';
-import PTRView from 'react-native-pull-to-refresh';
-
 
 export default class TopLists extends Component {
 

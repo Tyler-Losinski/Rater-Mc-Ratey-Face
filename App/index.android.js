@@ -16,9 +16,9 @@ import {
     Thumbnail, Text, Left, Body, Grid, Tabs, Tab
 } from 'native-base';
 
-import TopList from './top-list';
-import QuoteCards from './quote-cards';
-import SideBar from './main-menu.js'
+import TopList from './top-list.js';
+import QuoteCards from './BreweryCards.js';
+import SideBar from './SideBar.js'
 
 export default class AwesomeNativeBase extends Component {
 
