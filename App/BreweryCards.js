@@ -6,69 +6,62 @@ import {
 
 import {
     Card, CardItem, Thumbnail, Text, Button, Left, Body, Right,
-    Icon, View
+    Icon, View, Spinner
 } from 'native-base';
-
-import config from './server-config.json';
-
 
 export default class BreweryCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            RapQuotes: [{
-                Quote: '',
-                Quotee:''
-            }]
+            name: '',
+            brand:'',
+            image: '',
+            icon: ''
         };
-        //this.socket = io('http://still-tundra-25462.herokuapp.com',  { transports: ['websocket'] });
-
-        //this.socket.emit("get_quotes");
-
-        this.swipeRight = this.swipeRight.bind(this);
-        this.swipeLeft = this.swipeLeft.bind(this);
-        this.refresh = this.refresh.bind(this);
 
     }
 
-    refresh(e) {
-        return new Promise((resolve) => {
-            setTimeout(() => { resolve() }, 2000)
-        });
-    }
-
-    swipeRight(e) {
-      //  this.socket.emit('upvote', e.ID)
-    }
-
-    swipeLeft(e) {
-    //    this.socket.emit('downvote', e.ID)
-    }
 
     componentDidMount() {
-        // this.socket.on('card_quotes', (data) => {
-        //     this.setState({
-        //         RapQuotes: data
-        //     })
-        // })
+        fetch('https://api.brewerydb.com/v2/brewery/random?key=ef09f9959191ba23af7d87deb78f443e&format=json')
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+            if(responseJson.message == "Request Successful"){
+                this.setState({
+                    image: responseJson.data.images ? responseJson.data.images.large : '',
+                    icon: responseJson.data.images ? responseJson.data.images.icon : '',
+                    name: responseJson.data.name,
+                    brand: responseJson.data.brandClassification ? responseJson.data.brandClassification: ''
+                });    
+            }
+             
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
 
     render() {
 
         return (
             <View>
+                {this.state.name == '' &&
+                    <Spinner color='blue' />
+                }
+                {this.state.name != '' &&
                 <Card>
                     <CardItem>
                     <Left>
-                        <Thumbnail source={{uri: 'https://hypixel.net/attachments/dd8dba62-ebd4-4fcc-9308-ccf064224ee0-png.858244/'}} />
+                        <Thumbnail source={{uri: this.state.icon}} />
                         <Body>
-                        <Text>Cookie Monster</Text>
-                        <Text note>Cookies Inc.</Text>
+                        <Text>{this.state.name}</Text>
+                        <Text note>Brand: {this.state.brand}</Text>
                         </Body>
                     </Left>
                     </CardItem>
                     <CardItem cardBody>
-                    <Image source={{uri: 'https://wallpaper-house.com/data/out/7/wallpaper2you_167182.jpg'}} style={{height: 200, width: null, flex: 1}}/>
+                    <Image source={{uri: this.state.image}} style={{height: 200, width: null, flex: 1}}/>
                     </CardItem>
                     <CardItem>
                     <Left>
@@ -87,7 +80,7 @@ export default class BreweryCards extends Component {
                         <Text>11h ago</Text>
                     </Right>
                     </CardItem>
-                </Card>
+                </Card>}
             </View>
         );
     }

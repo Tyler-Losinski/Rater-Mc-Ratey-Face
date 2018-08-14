@@ -1,67 +1,28 @@
 ﻿import React, { Component } from 'react';
 import {
-    AppRegistry,
     StyleSheet,
-    Image
 } from 'react-native';
 
 import {
-    Container, Icon, ListItem, List, Right, RefreshControl,
-    Thumbnail, Text, Left, Body, Grid, Content, Spinner
+    Container, Content, Spinner
 } from 'native-base';
-import SideBar from './SideBar';
-
-import io from 'socket.io-client/dist/socket.io';
-import config from './server-config.json';
-
 export default class TopLists extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            RapQuotes: [{
-                Quote: '',
-                Quotee: ''
-            }],
-            isRefreshing: false
         };
-        // this.socket = io('http://still-tundra-25462.herokuapp.com', { transports: ['websocket'] });
-        // this.socket.emit('get_quotes_list');
     }
 
     componentDidMount() {
-        // this.socket.on('list_quotes', (data) => {
-        //     this.setState({
-        //         RapQuotes: data
-        //     })
-        // })
-    }
-
-    refreshList(e) {
-        this.setState({
-            isRefreshing: true
-        })
     }
 
     render() {
         return (
             <Container>
                 <Content>
-                    {this.state.RapQuotes[0].Quote == '' &&
+                    {true &&
                         <Spinner color='blue' />
-                    }
-                    {this.state.RapQuotes[0].Quote != '' &&
-                        <List
-                        dataArray={this.state.RapQuotes}
-                            renderRow={(item) =>
-                                <ListItem>
-                                <Body>
-                                    <Left><Text>{'"' + item.Quote + '"'}</Text></Left>
-                                    <Text note>{item.Quotee} <Icon name="ios-thumbs-up" />{item.Votes}</Text>
-                                    </Body>
-                                </ListItem>
-                            }>
-                        </List>
                     }
                 </Content>
             </Container>
