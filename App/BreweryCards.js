@@ -59,7 +59,7 @@ export default class BreweryCards extends Component {
     }
 
     render() {
-
+        const noImage = require ('./img/beer-tile.png');
         return (
             <Container>
                 <Header>
@@ -96,7 +96,7 @@ export default class BreweryCards extends Component {
                                                     </Left>
                                                 </CardItem>
                                                 <CardItem cardBody>
-                                                    <Image source={{ uri: item.brewery.images ? item.brewery.images.large : '' }} style={{ height: 200, width: null, flex: 1 }} />
+                                                    <Image source={item.brewery.images ? { uri: item.brewery.images.large} : noImage} style={{ height: 200, width: null, flex: 1 }} />
                                                 </CardItem>
                                                 <CardItem>
                                                     <Left>

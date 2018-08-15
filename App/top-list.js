@@ -8,6 +8,7 @@ import {
     Card, CardItem, Thumbnail, Text, Button, Left, Body, Right,
     Icon, View, Spinner, Container, Content, List, ListItem, Header, Title
 } from 'native-base';
+import _ from 'lodash';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -25,6 +26,11 @@ export default class TopLists extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             if (responseJson.data) {
+                responseJson.data.map((obj) => {
+                    obj.showDescription = false;
+                    return obj;
+                });
+
                 this.setState({
                     data: responseJson.data
                 });
@@ -40,6 +46,12 @@ export default class TopLists extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             if (responseJson.data) {
+
+                responseJson.data.map((obj) => {
+                    obj.showDescription = false;
+                    return obj;
+                });
+
                 this.setState({
                     data: responseJson.data
                 });
@@ -57,7 +69,21 @@ export default class TopLists extends Component {
         });
     }
 
+    showDescription(id){
+       var tempdata = this.state.data.slice();
+       for(var i = 0; i< tempdata.length; i++){
+           if(tempdata[i].id == id){
+               tempdata[i].showDescription = !tempdata[i].showDescription;
+               this.setState({
+                   data: _.cloneDeep(tempdata)
+               });
+               return;
+           }
+       } 
+    }
+
     render() {
+        const noImage = require ('./img/beer-tile.png');
         return (
             <Container>
                 <Header>
@@ -66,8 +92,8 @@ export default class TopLists extends Component {
                             <Icon name='arrow-back' />
                         </Button>
                     </Left>
-                    <Body style={{ paddingLeft: 40 }}>
-                        <Title>Beers</Title>
+                    <Body style={{flex:1,justifyContent: "center",alignItems: "center"}}>
+                        <Title>Tap List</Title>
                     </Body>
                 </Header>
 
@@ -78,14 +104,14 @@ export default class TopLists extends Component {
                             <Spinner color='blue' />
                         }
                         {this.state.data.length != 0 &&
-                            <List
+                            <List 
                                 dataArray={this.state.data}
                                 renderRow={(item) =>
                                     <ListItem >
                                         <Body>
                                             <Card>
                                                 <CardItem>
-                                                    <Left>sf
+                                                    <Left>
                                                         <Icon active name="beer" />
                                                         <Body>
                                                             <Text>{item.name}</Text>
@@ -95,11 +121,18 @@ export default class TopLists extends Component {
                                                     </Left>
                                                 </CardItem>
                                                 <CardItem cardBody>
-                                                    <Image source={{ uri: item.labels ? item.labels.medium : require('./img/beer-tile.png') }} style={{ height: 200, width: null, flex: 1 }} />
+                                                    <Image source={item.labels ? { uri: item.labels.medium } : noImage} style={{ height: 200, width: null, flex: 1 }} />
                                                 </CardItem>
-                                                <CardItem>
+                                                { item.showDescription && <CardItem>
                                                     <Body>
                                                         <Text>{item.description ? item.description : ''}</Text>
+                                                    </Body>
+                                                </CardItem>}
+                                                <CardItem footer>
+                                                    <Body>
+                                                        <Button transparent onPress={()=>{this.showDescription(item.id);}} style={{flex:1,justifyContent: "center",alignItems: "center"}}>
+                                                            <Text>{ !item.showDescription && 'Show description' } { item.showDescription && 'Hide description' }</Text>
+                                                        </Button>
                                                     </Body>
                                                 </CardItem>
                                             </Card>
