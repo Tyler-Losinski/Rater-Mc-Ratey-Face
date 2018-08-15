@@ -64,11 +64,11 @@ export default class BreweryCards extends Component {
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => { this.openDrawer() }}>
+                        <Button transparent onPress={() => {  }}>
                             <Icon name='ios-menu' />
                         </Button>
                     </Left>
-                    <Body style={{paddingLeft: 40}}>
+                    <Body style={{marginLeft: -40}}> 
                         <Title>Breweries</Title> 
                     </Body> 
                 </Header>

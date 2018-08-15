@@ -92,13 +92,12 @@ export default class TopLists extends Component {
                             <Icon name='arrow-back' />
                         </Button>
                     </Left>
-                    <Body style={{flex:1,justifyContent: "center",alignItems: "center"}}>
+                    <Body style={{marginLeft: -40}}> 
                         <Title>Tap List</Title>
                     </Body>
                 </Header>
 
                 <Content>
-
                     <View>
                         {this.state.data.length == 0 &&
                             <Spinner color='blue' />
