@@ -6,20 +6,15 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
+    AppRegistry,
+    StyleSheet,
 } from 'react-native';
-
-import {
-    Container, Header, Drawer, Button, Icon,
-    Thumbnail, Text, Left, Body, Title, Tabs, Tab
-} from 'native-base';
 
 import { Router, Scene } from 'react-native-router-flux';
 
 import TopList from './top-list.js';
 import BreweryCards from './BreweryCards.js';
-import SideBar from './SideBar'
+import BreweryMap from './BreweryMap.js'
 
 export default class AwesomeNativeBase extends Component {
 
@@ -54,48 +49,44 @@ export default class AwesomeNativeBase extends Component {
 
     render() {
         return (
-            // <Drawer
-            //     ref={(ref) => { this._drawer = ref; }}
-            //     content={<SideBar navigator={this._navigator} />}
-            //     side="left"
-            //     panOpenMask={.10}
-            // >
+            <Router hideNavBar="true">
+                <Scene key="root">
+                    <Scene key="breweryCards"
+                        component={BreweryCards}
+                        initial
+                    />
+                    <Scene
+                        key="topList"
+                        component={TopList}
+                    />
+                    <Scene
+                        key="map"
+                        component={BreweryMap}
+                    />
+                </Scene>
+            </Router>
 
-                    <Router hideNavBar= "true">
-                        <Scene key="root">
-                            <Scene key="breweryCards"
-                            component={BreweryCards}
-                            initial
-                            />
-                            <Scene
-                            key="topList"
-                            component={TopList}
-                            />
-                        </Scene>
-                    </Router>
-           // </Drawer>
-           
-      );
-  }
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+    },
 });
 
 AppRegistry.registerComponent('AwesomeNativeBase', () => AwesomeNativeBase);

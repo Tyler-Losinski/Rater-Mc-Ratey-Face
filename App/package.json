@@ -16,6 +16,7 @@
     "react-native-fs": "^2.3.2",
     "react-native-keep-awake": "^2.0.4",
     "react-native-mail": "^3.0.1",
+    "react-native-maps": "^0.21.0",
     "react-native-pathjs-charts": "0.0.31",
     "react-native-router-flux": "^3.39.1",
     "react-native-sqlite-storage": "^3.3.1",

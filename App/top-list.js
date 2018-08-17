@@ -143,6 +143,7 @@ export default class TopLists extends Component {
                     </View>
 
                 </Content>
+
             </Container>
         );
     }

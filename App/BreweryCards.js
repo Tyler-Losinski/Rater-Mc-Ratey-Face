@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 
 import {
-    Card, CardItem, Thumbnail, Text, Button, Left, Body, Right,
+    Card, CardItem, Thumbnail, Text, Button, Left, Body, Right, Footer, FooterTab,
     Icon, View, Spinner, Container, Content, List, ListItem, Header, Title
 } from 'native-base';
 
@@ -15,7 +15,8 @@ export default class BreweryCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            allowMap: false//so we have data before going to the map
         };
 
     }
@@ -42,7 +43,8 @@ export default class BreweryCards extends Component {
                 if (responseJson.data) {
                     for (var i = 0; i < responseJson.data.length; i++) {
                         this.setState({
-                            data: this.state.data.concat(responseJson.data[i])
+                            data: this.state.data.concat(responseJson.data[i]),
+                            allowMap: true
                         });
                     }
                 }
@@ -123,6 +125,18 @@ export default class BreweryCards extends Component {
                         }
                     </View>
                 </Content>
+                <Footer>
+                    <FooterTab>
+                        <Button vertical active>
+                            <Icon name="list" />
+                            <Text>Breweries</Text>
+                        </Button>
+                        <Button disabled={!this.state.allowMap} vertical onPress={()=>{Actions.map({breweries: this.state.data});}}>
+                            <Icon name="map" />
+                            <Text>Map</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
             </Container>
         );
     }
