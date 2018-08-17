@@ -15,6 +15,7 @@ import { Router, Scene } from 'react-native-router-flux';
 import TopList from './top-list.js';
 import BreweryCards from './BreweryCards.js';
 import BreweryMap from './BreweryMap.js'
+import Login from './Login'
 
 export default class AwesomeNativeBase extends Component {
 
@@ -25,16 +26,6 @@ export default class AwesomeNativeBase extends Component {
             active: 'stuff'
         };
 
-    }
-
-    static propTypes = {
-        drawerState: React.PropTypes.string,
-        popRoute: React.PropTypes.func,
-        closeDrawer: React.PropTypes.func,
-        navigation: React.PropTypes.shape({
-            key: React.PropTypes.string,
-            routes: React.PropTypes.array,
-        }),
     }
 
     openDrawer() {
@@ -53,7 +44,7 @@ export default class AwesomeNativeBase extends Component {
                 <Scene key="root">
                     <Scene key="breweryCards"
                         component={BreweryCards}
-                        initial
+                        
                     />
                     <Scene
                         key="topList"
@@ -62,6 +53,11 @@ export default class AwesomeNativeBase extends Component {
                     <Scene
                         key="map"
                         component={BreweryMap}
+                    />
+                    <Scene
+                        key="login"
+                        component={Login}
+                        initial
                     />
                 </Scene>
             </Router>
