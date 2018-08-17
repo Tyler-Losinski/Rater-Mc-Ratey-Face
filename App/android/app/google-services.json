@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "87437578983",
+    "firebase_url": "https://fargo-brews.firebaseio.com",
+    "project_id": "fargo-brews",
+    "storage_bucket": "fargo-brews.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87437578983:android:a531c7e286cd15bc",
+        "android_client_info": {
+          "package_name": "com.fargobrews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87437578983-nge07rglgqle2iucjvur4k6cp9o9m1fp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLhLeMih6ZGUGx_plmNVbHIKNQ9zH5-FE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,7 @@ import {
 
 import {
     Card, CardItem, Thumbnail, Text, Button, Left, Body, Right, Footer, FooterTab,
-    Icon, View, Spinner, Container, Content, List, ListItem, Header, Title
+    Icon, View, Spinner, Container, Content, List, ListItem, Header, Title, Drawer
 } from 'native-base';
 
 import { Actions } from 'react-native-router-flux';
@@ -63,6 +63,7 @@ export default class BreweryCards extends Component {
     render() {
         const noImage = require ('./img/beer-tile.png');
         return (
+            
             <Container>
                 <Header>
                     <Left>
