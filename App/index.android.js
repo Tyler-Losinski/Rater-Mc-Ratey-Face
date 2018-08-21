@@ -12,6 +12,7 @@ import {
 
 import { Router, Scene } from 'react-native-router-flux';
 
+
 import TopList from './top-list.js';
 import BreweryCards from './BreweryCards.js';
 import BreweryMap from './BreweryMap.js'
@@ -28,23 +29,15 @@ export default class AwesomeNativeBase extends Component {
 
     }
 
-    openDrawer() {
-        //this._drawer._root.open();
-    }
-
-    closeDrawer() {
-        if (this.props.drawerState === 'opened') {
-            this.props.closeDrawer();
-        }
-    }
 
     render() {
         return (
+
             <Router hideNavBar="true">
                 <Scene key="root">
                     <Scene key="breweryCards"
                         component={BreweryCards}
-                        
+                        initial
                     />
                     <Scene
                         key="topList"
@@ -57,12 +50,10 @@ export default class AwesomeNativeBase extends Component {
                     <Scene
                         key="login"
                         component={Login}
-                        initial
                     />
                 </Scene>
             </Router>
-
-        );
+     );
     }
 }
 

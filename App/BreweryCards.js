@@ -4,18 +4,22 @@ import {
     Image
 } from 'react-native';
 
-import {
+import SideMenu  from 'react-native-side-menu';
+
+import  {
     Card, CardItem, Thumbnail, Text, Button, Left, Body, Right, Footer, FooterTab,
-    Icon, View, Spinner, Container, Content, List, ListItem, Header, Title, Drawer
+    Icon, View, Spinner, Container, Content, List, ListItem, Header, Title 
 } from 'native-base';
 
 import { Actions } from 'react-native-router-flux';
+import SideBar from './side-bar.js'
 
 export default class BreweryCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
+            sideOpen: false,
             allowMap: false//so we have data before going to the map
         };
 
@@ -61,13 +65,20 @@ export default class BreweryCards extends Component {
     }
 
     render() {
+        const menu = <SideBar navigator={navigator}/>;
         const noImage = require ('./img/beer-tile.png');
         return (
-            
+            <SideMenu menu={menu}
+                isOpen={this.state.sideOpen}
+                onChange={isOpen => {this.setState({sideOpen:isOpen})}}
+                >
+
+
             <Container>
                 <Header>
+
                     <Left>
-                        <Button transparent onPress={() => {  }}>
+                        <Button transparent onPress={() => { this.setState({sideOpen: this.state.sideOpen ? false : true }); }}>
                             <Icon name='ios-menu' />
                         </Button>
                     </Left>
@@ -139,6 +150,8 @@ export default class BreweryCards extends Component {
                     </FooterTab>
                 </Footer>
             </Container>
+            </SideMenu>
+
         );
     }
 
